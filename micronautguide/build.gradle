@@ -1,0 +1,108 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "6.0.0"
+    id "io.micronaut.application" version '1.5.0'
+}
+
+version "0.1"
+group "example.micronaut"
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+micronaut {
+    runtime "netty"
+    testRuntime "junit5"
+    processing {
+        incremental true
+        annotations "example.micronaut.*"
+    }
+}
+
+ext {
+    // Use for version declaration
+    mapstructVersion = "1.4.2.Final"
+    lombokVersion = "1.18.20"
+    lombokMapstructBindingVersion = "0.2.0"
+    testcontainersVersion = "1.15.3"
+    micronautHibernateValidator = "3.0.0"
+    micronautGcp = "3.5.0"
+    jsonVersion = "20210307"
+    mockitoCoreVersion = "3.10.0"
+    builder4testVersion = "0.2.1"
+    toxiproxyVersion = "1.15.3"
+    mockServerVersion = "1.15.3"
+    mockServerClientVersion = "5.11.2"
+    junit5Version = "2.3.3"
+    junit5PlatformLauncher = "1.7.1"
+    jupiterEngineVersion = "5.7.1"
+    janinoVersion = "3.1.4"
+    jjwtVersion = "0.11.2"
+}
+
+dependencies {
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+    annotationProcessor "io.micronaut.data:micronaut-data-processor"
+    annotationProcessor "io.micronaut.openapi:micronaut-openapi"
+    implementation "io.micronaut:micronaut-validation"
+    implementation "io.micronaut:micronaut-runtime"
+    implementation "javax.annotation:javax.annotation-api"
+    implementation "io.micronaut:micronaut-http-client"
+    implementation "io.swagger.core.v3:swagger-annotations"
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    // Plugin io.freefair.lombok does not work with map-struct
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    implementation "io.micronaut:micronaut-management"
+    implementation "io.micronaut.micrometer:micronaut-micrometer-core"
+    implementation "io.micronaut.micrometer:micronaut-micrometer-registry-stackdriver"
+    implementation "io.micronaut.sql:micronaut-jdbc-hikari"
+    implementation "io.micronaut.data:micronaut-data-hibernate-jpa"
+    implementation "io.micronaut.sql:micronaut-hibernate-jpa"
+    implementation "io.micronaut.sql:micronaut-jooq"
+    implementation "io.micronaut:micronaut-tracing"
+    implementation "io.micronaut.gcp:micronaut-gcp-tracing"
+    implementation "io.micronaut.gcp:micronaut-gcp-logging"
+    implementation "io.micronaut.gcp:micronaut-gcp-pubsub"
+    implementation "io.micronaut.beanvalidation:micronaut-hibernate-validator:${micronautHibernateValidator}"
+    implementation "io.micronaut.gcp:micronaut-gcp-common"
+    implementation "io.micronaut.gcp:micronaut-gcp-secret-manager:${micronautGcp}"
+    implementation "io.micronaut.cache:micronaut-cache-core"
+    implementation "io.micronaut.cache:micronaut-cache-caffeine"
+    implementation "io.micronaut.cache:micronaut-cache-management"
+    implementation "org.codehaus.janino:janino:${janinoVersion}"
+    implementation "org.json:json:${jsonVersion}"
+    implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
+    runtimeOnly "io.zipkin.brave:brave-instrumentation-http"
+    runtimeOnly "io.jsonwebtoken:jjwt-impl:${jjwtVersion}"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jjwtVersion}"
+    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testImplementation "org.projectlombok:lombok:${lombokVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api"
+    testImplementation "io.micronaut.test:micronaut-test-junit5:${junit5Version}"
+    testImplementation "org.junit.platform:junit-platform-launcher:${junit5PlatformLauncher}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${jupiterEngineVersion}"
+    testImplementation "org.mockito:mockito-core:${mockitoCoreVersion}"
+    testImplementation "uk.co.caeldev:builder4test:${builder4testVersion}"
+    testImplementation platform("org.testcontainers:testcontainers-bom:${testcontainersVersion}")
+    testImplementation "org.testcontainers:testcontainers"
+    testImplementation "org.testcontainers:postgresql"
+    testImplementation "org.testcontainers:gcloud"
+    testImplementation "org.testcontainers:junit-jupiter"
+    testImplementation "org.testcontainers:toxiproxy:${toxiproxyVersion}"
+    testImplementation "org.testcontainers:mockserver:${mockServerVersion}"
+    testImplementation "org.mock-server:mockserver-client-java:${mockServerClientVersion}"
+}
+
+mainClassName = "example.micronaut.Application"
+java {
+    sourceCompatibility = JavaVersion.VERSION_16
+    targetCompatibility = JavaVersion.VERSION_16
+}
+
+
+
+
